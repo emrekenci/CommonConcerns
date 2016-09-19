@@ -6,9 +6,7 @@
     using System.IO;
     using System.Net.Http;
     using System.Threading.Tasks;
-    using CommonConcerns.Aop;
 
-    [HandleExceptions]
     public class LogService : ILogService
     {
         /// <summary>
@@ -157,7 +155,7 @@
                 return LogDestination.Loggly;
             }
 
-            throw new Exception("Log destionatin name could not be mapped to an enum value. Check your configuration file.");
+            throw new Exception("Log destionatin name could not be mapped to an enum value. It must be loggly or textfile. Check your configuration file.");
         }
     }
 }

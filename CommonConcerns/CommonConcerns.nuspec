@@ -2,7 +2,9 @@
 <package>
   <metadata>
     <id>CommonConcerns</id>
-    <version>$version$</version>
+    <version>1.0.7</version>
+    <licenseUrl>https://github.com/emrekenci/CommonConcerns/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/emrekenci/CommonConcerns</projectUrl>
     <authors>Emre Kenci</authors>
     <owners>Emre Kenci</owners>
     <description>
@@ -11,20 +13,17 @@
     <copyright>Copyright Emre Kenci</copyright>
     <language>en-US</language>
     <dependencies>
-      <dependency id="Newtonsoft.Json" version="8.0.3"/>
-      <dependency id="PostSharp" version="4.2.22"/>
+      <dependency id="Newtonsoft.Json" version="9.0.1"/>
+      <dependency id="PostSharp" version="4.3.20"/>
       <dependency id="Microsoft.AspNet.WebApi.Client" version="5.2.3" />
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\$configuration$\Common.dll" target="lib\net45" />
-    <file src="bin\$configuration$\Common.pdb" target="lib\net45" />
-    <file src="bin\$configuration$\Common.dll" target="lib\net451" />
-    <file src="bin\$configuration$\Common.pdb" target="lib\net451" />
+    <file src="bin\Debug\CommonConcerns.dll" target="lib\net452" />
+    <file src="bin\Debug\CommonConcerns.pdb" target="lib\net452" />
     <file src="app.config.install.xdt" target="content" />
     <file src="web.config.install.xdt" target="content" />
     <file src="app.config.uninstall.xdt" target="content" />
     <file src="web.config.uninstall.xdt" target="content" />
-    <file src="**\*.cs" target="src" />
   </files>
 </package>

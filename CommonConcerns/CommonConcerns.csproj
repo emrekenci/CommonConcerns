@@ -62,7 +62,6 @@
     <Compile Include="Services\SmtpService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="app.config.install.xdt" />
     <None Include="app.config.uninstall.xdt" />
     <None Include="CommonConcerns.nuspec" />

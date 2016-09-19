@@ -55,10 +55,7 @@
             }
             catch (Exception e)
             {
-                Console.WriteLine("CRITICAL ERROR: Exception on OnException." + e);
-                Debug.WriteLine("CRITICAL ERROR: Exception on OnException." + e);
-                LogService.WriteLog("Received exception in HandleExceptions. Actual error message could not be logged. Exception: " + e, LogType.ActionRequired);
-                args.FlowBehavior = FlowBehavior.Continue;
+                throw new Exception("Received an error in HandleExceptions attribute. This is likely due to a configuration error." + e.Message);
             }
         }
     }
