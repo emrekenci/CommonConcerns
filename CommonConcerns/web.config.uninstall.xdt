@@ -1,0 +1,14 @@
+﻿<?xml version="1.0"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <connectionStrings>
+    <add name="LogglyToken" connectionString="" xdt:Transform="Remove"/>
+    <add name="SmtpHost" connectionString="" xdt:Transform="Remove"/>
+    <add name="SmtpUsername" connectionString="" xdt:Transform="Remove"/>
+    <add name="SmtpPassword" connectionString="" xdt:Transform="Remove"/>
+  </connectionStrings>
+  <appSettings>
+    <add key="LogDestination" value="" xdt:Transform="Remove"/>
+    <add key="LogglySource" value="" xdt:Transform="Remove"/>
+    <add key="LogAppName" value="" xdt:Transform="Remove"/>
+  </appSettings>
+</configuration>

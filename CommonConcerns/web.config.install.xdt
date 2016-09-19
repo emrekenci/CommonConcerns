@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <connectionStrings>
+    <add name="LogglyToken" connectionString="" xdt:Transform="Insert"/>
+    <add name="SmtpHost" connectionString="" xdt:Transform="Insert"/>
+    <add name="SmtpUsername" connectionString="" xdt:Transform="Insert"/>
+    <add name="SmtpPassword" connectionString="" xdt:Transform="Insert"/>
+  </connectionStrings>
+  <appSettings>
+    <add key="LogDestination" value="" xdt:Transform="Insert"/>
+    <add key="LogglySource" value="" xdt:Transform="Insert"/>
+    <add key="LogAppName" value="" xdt:Transform="Insert"/>
+  </appSettings>
+</configuration>
