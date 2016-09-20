@@ -13,10 +13,11 @@
         /// Non static method to allow mocking this class, just calls the static WriteLog method
         /// </summary>
         /// <param name="message">Log message</param>
-        /// <param name="type"></param>
-        public void Write(string message, LogType type)
+        /// <param name="type">Log type, error info etc.</param>
+        /// <param name="destination">Overwrites the log destination set in the config file</param>
+        public void Write(string message, LogType type, LogDestination destination = LogDestination.None)
         {
-            WriteLog(message, type);
+            WriteLog(message, type, destination);
         }
 
         /// <summary>
@@ -24,9 +25,9 @@
         /// </summary>
         /// <param name="message">Log message</param>
         /// <param name="type"></param>
-        public async Task WriteAsync(string message, LogType type)
+        public async Task WriteAsync(string message, LogType type, LogDestination destination = LogDestination.None)
         {
-            await Task.Run(() => WriteLog(message, type));
+            await Task.Run(() => WriteLog(message, type, destination));
         }
 
         /// <summary>
@@ -35,11 +36,14 @@
         /// </summary>
         /// <param name="message">Log message</param>
         /// <param name="type">Log type</param>
-        public static void WriteLog(string message, LogType type)
+        public static void WriteLog(string message, LogType type, LogDestination destination = LogDestination.None)
         {
-            var logDestination = GetDestination();
+            if(destination == LogDestination.None)
+            {
+                destination = GetDestinationFromConfig();
+            }
 
-            switch (logDestination)
+            switch (destination)
             {
                 case LogDestination.TextFile:
                     {
@@ -60,9 +64,9 @@
         /// </summary>
         /// <param name="message">Log message</param>
         /// <param name="type">Log type</param>
-        public static async Task WriteLogAsync(string message, LogType type)
+        public static async Task WriteLogAsync(string message, LogType type, LogDestination destination = LogDestination.None)
         {
-            await Task.Run(() => WriteLog(message, type));
+            await Task.Run(() => WriteLog(message, type, destination));
         }
 
         private static void LogToTextFile(string logMessage, LogType type)
@@ -71,7 +75,7 @@
             {
                 using (var logWriter = !File.Exists("log.txt") ? new StreamWriter("log.txt") : File.AppendText("log.txt"))
                 {
-                    logWriter.WriteLineAsync(DateTime.UtcNow + ". Type: " + GetTypeDesc(type) + Environment.NewLine +
+                    logWriter.WriteLineAsync(DateTime.UtcNow + ". Type: " + type.ToString() + Environment.NewLine +
                                                    "Log message: " + logMessage + Environment.NewLine).Wait();
 
                     logWriter.Flush();
@@ -93,7 +97,7 @@
                 object log = new
                 {
                     Message = message,
-                    LogType = GetTypeDesc(type),
+                    LogType = type.ToString(),
                     AppName = appName,
                     MachineName = Environment.MachineName
                 };
@@ -110,31 +114,7 @@
             }
         }
 
-        private static string GetTypeDesc(LogType type)
-        {
-            switch (type)
-            {
-                case LogType.ActionRequired:
-                    {
-                        return "Action Required";
-                    }
-                case LogType.Error:
-                    {
-                        return "Error";
-                    }
-                case LogType.Warning:
-                    {
-                        return "Warning";
-                    }
-                case LogType.Info:
-                    {
-                        return "Info";
-                    }
-            }
-            return null;
-        }
-
-        private static LogDestination GetDestination()
+        private static LogDestination GetDestinationFromConfig()
         {
             var destinationName = ConfigurationManager.AppSettings["LogDestination"];
 

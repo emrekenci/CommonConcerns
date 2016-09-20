@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>CommonConcerns</id>
-    <version>1.0.7</version>
+    <version>1.0.8</version>
     <licenseUrl>https://github.com/emrekenci/CommonConcerns/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/emrekenci/CommonConcerns</projectUrl>
     <authors>Emre Kenci</authors>

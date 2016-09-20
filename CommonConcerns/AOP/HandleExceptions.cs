@@ -1,7 +1,6 @@
 ﻿namespace CommonConcerns.Aop
 {
     using System;
-    using System.Diagnostics;
     using System.Configuration;
 
     using PostSharp.Aspects;
@@ -11,6 +10,18 @@
     [Serializable]
     public class HandleExceptions : OnExceptionAspect
     {
+        /// <summary>
+        /// Allows to overwrite the LogDestination in the config file
+        /// </summary>
+        public LogDestination LogDestination { get; set; }
+
+        /// <summary>
+        /// If it is set to true, the log messages will be written asynchronously.
+        /// Be careful using this. If the application context dies before the LogService completes writing the log, 
+        /// the log message may never reach the log destination.
+        /// </summary>
+        public bool WriteLogsAsync { get; set; }
+
         /// <summary>
         /// Invoked when there is an exception in methods that are decorated with this aspect.
         /// Parses the MethodExecutionArgs and writes an error log. 
@@ -42,14 +53,21 @@
                     }
                 }
 
-                var className = args.Method.DeclaringType?.Name ?? "Clas name not found";
+                var className = args.Method.DeclaringType?.Name ?? "Class name not found";
 
                 var logMessage = "Exception in " + args.Method.Name + " method of class: " + className +
                                  ". Exception: " + args.Exception + " Stack trace: " + args.Exception.StackTrace +
                                  ". Inner Exception: " + args.Exception.InnerException +
                                  ". Method was called with arguments: " + arguments;
-
-                LogService.WriteLog(logMessage, LogType.Error);
+                
+                if(WriteLogsAsync)
+                {
+                    LogService.WriteLogAsync(logMessage, LogType.Error, this.LogDestination);
+                }
+                else
+                {
+                    LogService.WriteLog(logMessage, LogType.Error, this.LogDestination);
+                }
 
                 args.FlowBehavior = FlowBehavior.Continue;
             }

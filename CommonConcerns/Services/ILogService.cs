@@ -4,8 +4,8 @@
 
     public interface ILogService
     {
-        void Write(string message, LogType type);
-        Task WriteAsync(string message, LogType type);
+        void Write(string message, LogType type, LogDestination destination = LogDestination.None);
+        Task WriteAsync(string message, LogType type, LogDestination destination = LogDestination.None);
     }
 
     /// <summary>
@@ -24,6 +24,7 @@
     /// </summary>
     public enum LogDestination
     {
+        None = 0,
         TextFile,
         Loggly
     }
