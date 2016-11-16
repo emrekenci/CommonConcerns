@@ -2,13 +2,13 @@
 <package>
   <metadata>
     <id>CommonConcerns</id>
-    <version>1.0.8</version>
+    <version>1.1.1</version>
     <licenseUrl>https://github.com/emrekenci/CommonConcerns/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/emrekenci/CommonConcerns</projectUrl>
     <authors>Emre Kenci</authors>
     <owners>Emre Kenci</owners>
     <description>
-      CommonConcerns allows to rapidly build software by less boilerplate code like logging, exception handling, sending an email
+      CommonConcerns speeds up building software by addressing common concerns that require a lot of boilerplate code.
     </description>
     <copyright>Copyright Emre Kenci</copyright>
     <language>en-US</language>
