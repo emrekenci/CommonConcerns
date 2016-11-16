@@ -60,6 +60,7 @@
     <Compile Include="Services\ISmtpService.cs" />
     <Compile Include="Services\LogService.cs" />
     <Compile Include="Services\SmtpService.cs" />
+    <Compile Include="Utils\PasswordHasher.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
