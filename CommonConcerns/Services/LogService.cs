@@ -25,6 +25,7 @@
         /// </summary>
         /// <param name="message">Log message</param>
         /// <param name="type"></param>
+        /// <param name="destination">Log destination</param>
         public async Task WriteAsync(string message, LogType type, LogDestination destination = LogDestination.None)
         {
             await Task.Run(() => WriteLog(message, type, destination));
@@ -36,6 +37,7 @@
         /// </summary>
         /// <param name="message">Log message</param>
         /// <param name="type">Log type</param>
+        /// <param name="destination">Log destination</param>
         public static void WriteLog(string message, LogType type, LogDestination destination = LogDestination.None)
         {
             if(destination == LogDestination.None)
@@ -64,6 +66,7 @@
         /// </summary>
         /// <param name="message">Log message</param>
         /// <param name="type">Log type</param>
+        /// <param name="destination">Log destination</param>
         public static async Task WriteLogAsync(string message, LogType type, LogDestination destination = LogDestination.None)
         {
             await Task.Run(() => WriteLog(message, type, destination));
@@ -94,12 +97,14 @@
             {
                 var logglyUrl = "http://logs-01.loggly.com/inputs/" + ConfigurationManager.ConnectionStrings["LogglyToken"] + "/tag/http," + ConfigurationManager.AppSettings["LogglySource"] + "/";
                 var appName = ConfigurationManager.AppSettings["LogAppName"];
+                var logType = type.ToString();
+
                 object log = new
                 {
                     Message = message,
-                    LogType = type.ToString(),
+                    Type = logType,
                     AppName = appName,
-                    MachineName = Environment.MachineName
+                    Environment.MachineName
                 };
 
                 using (var client = new HttpClient())
